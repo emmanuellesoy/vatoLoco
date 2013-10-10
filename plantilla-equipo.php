@@ -9,7 +9,7 @@
 	  <div class="miembrosEquiipo">
             <?php query_posts('category_name=equipo');?>
             <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-            <?php  $meta = get_post_custom(get_the_ID); ?>
+            <?php  $meta = get_post_custom(get_the_ID()); ?>
                 
                 <div class="contenidoEquipo">
                     <div class="circuloEquipo">

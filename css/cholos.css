@@ -316,7 +316,20 @@ height: 768px;;
 	margin: 10px 0px 20px 30px;
 	border-radius: 10px;
 }
-
+.imagenSlider_1,
+.imagenSlider_2,
+.imagenSlider_3
+{
+	display: none;
+}
+.slider_inicio
+{
+	display: none;
+}
+.slider_inicio_0
+{
+	display: block;
+}
 .imagenSlider img{
 	height: 350px;
 	width: 560px;
@@ -427,7 +440,8 @@ height: 768px;;
 
 
 .proyectos{
-background:url('../img/bg_proyectos.png');
+background:url('../img/bg_proyectos.png'), url('../img/blue_pat.png');
+background-repeat: no-repeat, repeat;
 margin: 0 auto;
 width: 1000px;
 height: auto;
@@ -493,11 +507,17 @@ float: left;
 
 .galeriaProyectos{
 	width: 800px;
-	height: auto;
+	height: 991px;
 	float: left;
 	margin: 30px 100px;
 }
 
+#tab2,
+#tab3,
+#tab4
+{
+	display: none;
+}
 
 .imagenIndividual
 {
@@ -523,7 +543,15 @@ float: left;
     box-shadow: -5px 5px 3px #3A5F6B;
     cursor: default;
 }
-
+.oculto
+{
+	display: none;
+}
+.vista>a>img
+{
+	height: 187px;
+	width: 180px;
+}
 .vista .mascara, .vista .contenido {
     width: 180px;
     height: 187px;
@@ -703,6 +731,7 @@ float: left;
 }
 
 .cargarProyectos{
+	cursor: pointer;
 	float: left;
 	width: 216px;
 	height: 21px;

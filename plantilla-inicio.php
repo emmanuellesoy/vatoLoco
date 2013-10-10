@@ -8,65 +8,64 @@
 
 	<div class="slider">  <!--inicia Slider-->
 		<aside class="tituloSlider">
-				<ul>
-					<li class="destacados">Proyectos Destacados</li>
-
-
-					<?php query_posts('category_name=web&posts_per_page=1'); ?>
+			<ul>
+				<li class="destacados">Proyectos Destacados</li>
+				<?php $categorias = array('web', 'video', 'foto', 'hibrido'); ?>
+				<?php $contador = 0; ?>
+				<?php foreach ($categorias as $categoria) { ?>
+				<?php query_posts('category_name='.$categoria.'&posts_per_page=1'); ?>
 					<?php if (have_posts()) : ?>
 					<?php while (have_posts()) : the_post(); ?>
 					<?php $custom_fields = get_post_custom(); ?>
-					<li class="sliderWeb sliderProyectos">
-						<a href="<?php bloginfo('wpurl'); ?>" title="Proyecto 1"><?php the_title(); ?>
-							<p><?php echo $custom_fields['subtitulo'][0];?></p>
-						</a>
-					</li>
-						<?php endwhile; ?>
-						<?php endif; ?>
-
-
-					<li class="sliderVideo sliderProyectos">
-						<a href="<?php bloginfo('wpurl'); ?>" title="Proyecto 1">Proyecto 2
-							<p>Lorem</p>
-						</a>
-					</li>
-					<li class="sliderFoto sliderProyectos">
-						<a href="<?php bloginfo('wpurl'); ?>" title="Proyecto 1">Proyecto 3
-							<p>Lorem</p>
-						</a>
-					</li>
-					<li class="sliderHibrido sliderProyectos">
-						<a href="<?php bloginfo('wpurl'); ?>" title="Proyecto 1">Proyecto 4
-							<p>Lorem</p>
-						</a>
-					</li>
-				</ul>
+						<li onclick="mostrar_slider(<?php echo $contador; ?>);" class="slider<?php echo ucfirst($categoria) ?> sliderProyectos">
+							<a onclick="no_liga();" href="<?php echo get_permalink(); ?>" title="Proyecto 1"><?php the_title(); ?>
+								<p><?php echo $custom_fields['subtitulo'][0];?></p>
+							</a>
+						</li>
+					<?php endwhile; ?>
+					<?php endif; ?>
+					<?php $contador++; ?>
+				<?php } ?>
+			</ul>
 		</aside>
 		
-		<div class="imagenSlider">
-			<img src="<?php bloginfo('template_directory'); ?>/img/ejemplo.jpg">
-			
-			
-			<div class="controlesSlider">
-				<div class="controlesSliderPrevio"></div>
-				<div class="controlesSliderSiguiente"></div>
-			</div>
-			
-			<div class="detallesProyectoSlider">
-				<div class="textosSlider">
-					<div class="tituloProyectoSlider">Titulo</div>
-					<div class="resumenProyectoSlider">
-						Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a
+		
+			<?php $categorias = array('web', 'video', 'foto', 'hibrido'); ?>
+			<?php $contadorD = 0; ?>
+			<?php foreach ($categorias as $categoria) { ?>
+				<?php query_posts('category_name='.$categoria.'&posts_per_page=1'); ?>
+				<?php if (have_posts()) : ?>
+					<?php while (have_posts()) : the_post(); ?>
+					<?php $contador_0 = 0; ?>
+					<div class="imagenSlider <?php echo 'imagenSlider_'.$contadorD; ?>">
+						<?php $custom_fields = get_post_custom(); ?>
+						<?php if($custom_fields['slider']){ foreach ($custom_fields['slider'] as $frame ) { ?>
+							<img class="slider_inicio slider_inicio_<?php echo $contador_0; ?>" src="<?php echo $frame; ?>">
+							<?php $contador_0++; ?>
+						<?php } }?>
+						<div class="controlesSlider">
+							<div class="controlesSliderPrevio" onclick="slider_principal('izq');" data-frame="1"></div>
+							<div class="controlesSliderSiguiente" onclick="slider_principal('der');"></div>
+						</div>
+						
+						<div class="detallesProyectoSlider">
+							<div class="textosSlider">
+								<div class="tituloProyectoSlider"><?php the_title(); ?></div>
+								<div class="resumenProyectoSlider">
+									<?php the_content(); ?>
+								</div>
+							</div>
+							
+							<div class="botonProyectoSlider">
+								<div class="irProyectoSlider">
+									<a href="">Ver proyecto</a>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-				
-				<div class="botonProyectoSlider">
-					<div class="irProyectoSlider">
-						<a href="">Ver proyecto</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> <!--Termina Slider-->
-
+					<?php $contadorD++; ?>
+					<?php endwhile; ?>
+				<?php endif; ?>			
+			<?php } ?>
+		</div> <!--Termina Slider-->
 </div> <!--Termina Seccion Inicio/Slider-->

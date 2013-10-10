@@ -49,3 +49,72 @@ $(function(){
        }
    });
 });
+
+function slider_principal(dir){
+
+  id = $('.controlesSliderPrevio').attr('data-frame');
+  $('.slider_inicio').hide();
+  $('.slider_inicio_' + id).show();
+  if(dir == 'der'){
+    id = parseInt(id) + 1;
+    if(id == 4){
+      id = 0;
+    }
+  } else {
+    id = parseInt(id) - 1;
+    if(id == -1){
+      id = 3;
+    }
+  }
+  $('.controlesSliderPrevio').attr('data-frame', id);
+}
+
+$(document).ready(function(){
+  $(".sliderProyectos a").click(function(event) {
+    event.preventDefault();
+  });
+  $(".vista a").click(function(event) {
+    event.preventDefault();
+  });
+
+});
+
+function mostrar_slider(id){
+  $('.imagenSlider').hide();
+  $('.imagenSlider_' + id).show();
+}
+
+function filtro_proyectos(tab){
+  $('.galeriaProyectos').hide();
+  $('#' + tab).show();
+}
+
+function muestra_el_proyecto_grande(tab){
+  $('.detallesProyectos').hide();
+  $('#div' + tab).show();
+}
+
+function traer_mas(query)
+{
+  var pg = $('.verMasResultados').attr('data-paged');
+  var ps = $('.verMasResultados').attr('data-pages');
+  query = query + '&paged=' + pg;
+  pg = parseInt(pg) + parseInt(1);
+  var json_to_send = {action : 'traer_mas', query : query};
+    var uri = wp_url+'/wp-admin/admin-ajax.php';
+  $.ajax({
+      url : uri,
+      type : 'POST',
+      data : json_to_send,
+      success : function(data){
+          $('#tab' + nTab).append(data);
+      }
+  });
+}
+
+function cargar_mas_proyectos(){
+    var gp = $('.galeriaProyectos').css('height');
+    gp = parseInt(gp);
+    gp = gp + 200;
+    $('.galeriaProyectos').css('height', gp + 'px');
+}
